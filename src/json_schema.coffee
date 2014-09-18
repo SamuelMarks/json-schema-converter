@@ -66,12 +66,14 @@ module.exports =
             mongoose.Schema.Types.Mixed
           else
             converted = _.mapValues json_schema.properties, convert
+            console.log "converted = %j", converted
             if json_schema.required?
               _.mapValues converted, (subschema, key) ->
                 if key in json_schema.required and not _.isPlainObject subschema
                   type: subschema
                   required: true
                 else
+                  console.log "subschema.default #{subschema.default}"
                   subschema
             else
               converted
@@ -118,7 +120,8 @@ module.exports =
       try
         new mongoose.Schema mongoose_schema
       catch error
-        throw new Error "Invalid mongoose schema: '#{mongoose_schema}', err is: #{error.message}"
+        throw new Error "Invalid mongoose schema: '#{mongoose_schema}',
+                         err is: #{error.message}"
       # Really, we only need to add the ObjectId type definition to those schemas
       # which include a $ref to object id, but for now we can just append to all
       # JSON Schemas- not a big deal.

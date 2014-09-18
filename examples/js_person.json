@@ -6,7 +6,8 @@
       "type": "number"
     },
     "name": {
-      "type": "string"
+      "type": "string",
+      "default": "Jay Schem"
     },
     "birthday": {
       "type": "string",
@@ -27,5 +28,4 @@
       }
     }
   }
-} 
-
+}
